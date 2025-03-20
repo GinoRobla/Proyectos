@@ -2,7 +2,7 @@ from modelos.entidades.cliente import Cliente
 import json
 
 class RepositorioClientes:
-    ruta_archivo = "datos/clientes.json"
+    ruta_archivo = r"C:\Proyectos\PORTFOLIO\Proyecto 1\datos\clientes.json"
 
     def __init__(self):
         self.__clientes = []

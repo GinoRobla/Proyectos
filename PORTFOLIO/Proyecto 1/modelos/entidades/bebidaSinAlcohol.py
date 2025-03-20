@@ -22,7 +22,7 @@ class BebidaSinAlcohol(Bebida):
         return self.__natural
     
     def establecerSabor(self, sabor:str):
-        if not isinstance(sabor, str) or sabor == "":
+        if not isinstance(sabor, str) or not sabor.strip():
             raise ValueError("El sabor no puede ser vacío")
         self.__sabor = sabor
     

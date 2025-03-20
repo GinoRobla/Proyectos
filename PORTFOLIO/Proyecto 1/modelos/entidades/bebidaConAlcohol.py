@@ -8,7 +8,7 @@ class BebidaConAlcohol(Bebida):
     def __init__(self, nombre:str, costo:float, stock:int, mililitros:int, graduacionAlcoholica: float):
         super().__init__(nombre, costo, stock, mililitros)
         if not isinstance(graduacionAlcoholica, (int, float)) or graduacionAlcoholica < 0 or graduacionAlcoholica > 100:
-            raise ValueError("La graduación alcohólica debe ser un número positivo")
+            raise ValueError("La graduación alcohólica debe ser un número entre 0 y 100")
         self.__graduacionAlcoholica = graduacionAlcoholica
 
     def obtenerPrecio(self):
@@ -19,7 +19,7 @@ class BebidaConAlcohol(Bebida):
     
     def establecerGraduacionAlcoholica(self, graduacionAlcoholica:float):
         if not isinstance(graduacionAlcoholica, (int, float)) or graduacionAlcoholica < 0 or graduacionAlcoholica > 100:
-            raise ValueError("La graduación alcohólica debe ser un número positivo")
+            raise ValueError("La graduación alcohólica debe ser un número entre 0 y 100")
         self.__graduacionAlcoholica = graduacionAlcoholica
 
     def toDiccionario(self):

@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
 
 class Bebida(ABC):
-
+    @classmethod
+    def fromDiccionario(cls, diccionario:dict):
+        return cls(diccionario["nombre"], diccionario["costo"], diccionario["stock"], diccionario["mililitros"])  
     def __init__(self, nombre:str, costo:float, stock:int, mililitros:int):
         if not isinstance(nombre, str) or nombre == "" or nombre.isspace():
             raise Exception("El nombre debe ser un string")
@@ -42,8 +44,8 @@ class Bebida(ABC):
             raise ValueError("El costo debe ser un número positivo")
         self._costo = costo
 
-    def establecerMililitros(self, mililitros:int):
-        if not isinstance(mililitros, int, (float)) or mililitros < 0: #agregue para que valide si no es float tambien porque los mililitros pueden ser decimales tambien.
+    def establecerMililitros(self, mililitros:float):
+        if not isinstance(mililitros, (int, float)) or mililitros < 0: #agregue para que valide si no es float tambien porque los mililitros pueden ser decimales tambien.
             raise ValueError("Los mililitros del envase deben ser un número positivo")
         self._mililitros = mililitros
     
@@ -55,3 +57,12 @@ class Bebida(ABC):
             raise ValueError("El costo de reposición debe ser un número positivo")
         self._stock += cantidad
         self._costo = costo_reposicion
+    
+    def toDiccionario(self):
+        return {
+            "nombre": self._nombre,
+            "costo": self._costo,
+            "stock": self._stock,
+            "mililitros": self._mililitros,
+            "precio": self.obtenerPrecio()
+        }

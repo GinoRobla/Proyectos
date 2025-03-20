@@ -75,5 +75,6 @@ def modificar_cliente(dni):
 @bp_clientes.route("/clientes/<int:dni>", methods=["DELETE"])
 def eliminar_cliente(dni):
     if repo_clientes.eliminarCliente(dni):
-        return jsonify({"Mensaje": "Cliente eliminado con éxito"}), 200  
-    return jsonify({"error": "No se encontró el cliente a eliminar"}), 404  
+        repo_clientes.eliminarCliente(dni)
+        return jsonify({"Mensaje": "Cliente eliminado con éxito"}), 200
+    return jsonify({"error": "Cliente no encontrado"}), 404

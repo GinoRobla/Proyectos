@@ -1,13 +1,5 @@
 [
     {
-        "nombre": "Cerveza",
-        "costo": 4,
-        "stock": 650,
-        "mililitros": 500,
-        "graduacionAlcoholica": 5.0,
-        "precio": 6.4
-    },
-    {
         "nombre": "Jugo de Naranja",
         "costo": 1.5,
         "stock": 50,
@@ -15,15 +7,6 @@
         "sabor": "Naranja",
         "natural": true,
         "precio": 2.25
-    },
-    {
-        "nombre": "Gaseosa Cola",
-        "costo": 1.0,
-        "stock": 200,
-        "mililitros": 355,
-        "sabor": "Cola",
-        "natural": false,
-        "precio": 1.5
     },
     {
         "nombre": "Vino Tinto",
@@ -41,5 +24,14 @@
         "sabor": "Natural",
         "natural": true,
         "precio": 1.2000000000000002
+    },
+    {
+        "nombre": "Sprite",
+        "costo": 1.0,
+        "stock": 200,
+        "mililitros": 355,
+        "sabor": "Limon",
+        "natural": false,
+        "precio": 1.5
     }
 ]

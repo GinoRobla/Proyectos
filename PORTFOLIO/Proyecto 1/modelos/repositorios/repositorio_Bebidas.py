@@ -4,7 +4,7 @@ from modelos.entidades.bebida import Bebida
 import json
 
 class RepositorioBebidas:
-    ruta_archivo = "datos/bebidas.json"
+    ruta_archivo = r"C:\Proyectos\PORTFOLIO\Proyecto 1\datos\bebidas.json"
 
     def __init__(self):
         self.__bebidas = []
@@ -36,26 +36,26 @@ class RepositorioBebidas:
         """Retorna una lista con todas las bebidas"""
         return self.__bebidas
     
-    def obtenerBebidaPorNombre(self, nombre:str) -> Bebida: #agrego el tipo que devuelve
-        if not isinstance(nombre, str) or nombre == "" or nombre.isspace(): #agrego la validacion
+    def obtenerBebidaPorNombre(self, nombre:str) -> Bebida:
+        if not isinstance(nombre, str) or nombre == "" or nombre.isspace():
             raise ValueError("El nombre debe ser un string válido.")
         """Retorna la bebida con el nombre indicado, None si no existe"""
         for bebida in self.__bebidas:
-            if bebida.obtenerNombre().lower == nombre.lower: #agrego que este todo en minuscula para que no tenga problema al bucar una bebida por su nombre
+            if bebida.obtenerNombre().lower() == nombre.lower():  # corregido
                 return bebida
         return None
     
-    def existeBebida(self, nombre:str) -> bool: #agrego el tipo que devuelve
+    def existeBebida(self, nombre:str) -> bool:
         """Retorna True si existe una bebida con el nombre indicado, False en caso contrario"""
-        if not isinstance(nombre, str) or nombre == "" or nombre.isspace(): #agrego la validacion
+        if not isinstance(nombre, str) or nombre == "" or nombre.isspace():
             raise ValueError("El nombre debe ser un string válido.")        
-        for bebida in self.__bebidas: #arreglo la busqueda
-            if bebida.obtenerNombre().lower == nombre.lower:
+        for bebida in self.__bebidas:
+            if bebida.obtenerNombre().lower() == nombre.lower():
                 return True
         return False
 
-    def agregarBebida(self, bebida: Bebida) -> Bebida: #agrego el tipo que devuelve
-        if not isinstance(bebida, Bebida): #agrego la validacion
+    def agregarBebida(self, bebida: Bebida) -> Bebida:
+        if not isinstance(bebida, Bebida):
             raise ValueError("El objeto debe ser una instancia de Bebida")
         """Agrega una bebida al repositorio. Lanza ValueError si ya existe una bebida con el mismo nombre"""
         if self.existeBebida(bebida.obtenerNombre()):
@@ -63,28 +63,27 @@ class RepositorioBebidas:
         self.__bebidas.append(bebida)
         self.__guardarBebidas()
 
-    def actualizarBebida(self, nombre:str, bebida: Bebida)->bool:
-        if not isinstance(bebida, Bebida): #agrego la validacion
+    def actualizarBebida(self, nombre:str, bebida: Bebida) -> bool:
+        if not isinstance(bebida, Bebida):
             raise ValueError("El objeto debe ser una instancia de Bebida")
-        if not isinstance(nombre, str) or nombre == "" or nombre.isspace(): #agrego la validacion
+        if not isinstance(nombre, str) or nombre == "" or nombre.isspace():
             raise ValueError("El nombre debe ser un string válido.")
         """Actualiza los datos de una bebida en base a su nombre. Retorna True si la bebida fue actualizada, False en caso contrario"""
         for bebida_a_modificar in self.__bebidas:
-            if bebida_a_modificar.obtenerNombre().lower == nombre.lower: #agrego el .lower para que este todo minuscula (no me acuerdo si a python le importa o no que este en minuscula o mayus)          
-                self.__bebidas.remove(bebida_a_modificar) #elimino la bebida existente
-                self.__bebidas.append(bebida) #agrego la misma pero modificada
+            if bebida_a_modificar.obtenerNombre().lower() == nombre.lower():  # corregido
+                self.__bebidas.remove(bebida_a_modificar)
+                self.__bebidas.append(bebida)
                 self.__guardarBebidas()
                 return True
         return False
     
-    def eliminarBebida(self, nombre:str)->bool:
-        if not isinstance(nombre, str) or nombre == "" or nombre.isspace(): #agrego la validacion
+    def eliminarBebida(self, nombre:str) -> bool:
+        if not isinstance(nombre, str) or nombre == "" or nombre.isspace():
             raise ValueError("El nombre debe ser un string válido.")
         """Elimina una bebida en base a su nombre. Retorna True si la bebida fue eliminada, False en caso contrario"""
         for bebida in self.__bebidas:
-            if bebida.obtenerNombre().lower == nombre.lower: #agrego para que este todo minuscula
+            if bebida.obtenerNombre().lower() == nombre.lower():  # corregido
                 self.__bebidas.remove(bebida)
                 self.__guardarBebidas()
                 return True
         return False
-    

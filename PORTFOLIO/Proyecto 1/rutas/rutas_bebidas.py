@@ -21,18 +21,18 @@ def obtener_bebida(nombre):
 
 @bp_bebidas.route("/bebidas", methods=["POST"])  
 def agregar_bebida():
-    if request.is_json:  #valida que los datos sea de tipo json
+    if request.is_json:  # valida que los datos sean de tipo JSON
         datos = request.json
-        if "nombre" in datos and "stock" in datos and "costo" in datos: #agrego que valide que los campos obligatorios lleguen en el json
+        if "nombre" in datos and "stock" in datos and "costo" in datos:  # valida que los campos obligatorios lleguen en el JSON
             if "graduacionAlcoholica" in datos:
                 bebida = BebidaConAlcohol.fromDiccionario(datos)
                 tipo = "con alcohol"  
             else:
                 bebida = BebidaSinAlcohol.fromDiccionario(datos)  
                 tipo = "sin alcohol" 
-            if repo_bebidas.existeNombre(datos["nombre"]): #valida si ya existe una bebida con ese nombre
+            if repo_bebidas.existeBebida(datos["nombre"]):  # valida si ya existe una bebida con ese nombre
                 respuesta = {"error": "Ya existe una bebida con el nombre especificado."}  
-                codigoRespuesta = 400  #agregamos la variable codigo de respuesta asi no nos quedan tantos returns
+                codigoRespuesta = 400  # agregamos la variable codigo de respuesta así no nos quedan tantos returns
             else:
                 repo_bebidas.agregarBebida(bebida) 
                 respuesta = {  
@@ -43,9 +43,10 @@ def agregar_bebida():
         else:
             respuesta = {"error": "Faltan datos en el JSON. Debe incluir 'nombre', 'stock' y 'costo'."}
             codigoRespuesta = 400  
+    else:
         respuesta = {"error": "Los datos deben estar en formato JSON."}
         codigoRespuesta = 400 
-    return jsonify(respuesta), codigoRespuesta  
+    return jsonify(respuesta), codigoRespuesta
 
 @bp_bebidas.route("/bebidas/<string:nombre>", methods=["PUT"])  
 def modificar_bebida(nombre):
@@ -58,7 +59,7 @@ def modificar_bebida(nombre):
             else:
                 bebida = BebidaSinAlcohol.fromDiccionario(datos)  
                 tipo = "sin alcohol" 
-            if repo_bebidas.existeNombre(nombre): #valida si ya existe una bebida con ese nombre para asi modificarla
+            if repo_bebidas.existeBebida(nombre): #valida si ya existe una bebida con ese nombre para asi modificarla
                 if repo_bebidas.actualizarBebida(nombre, bebida):  
                     respuesta = {  
                         "Mensaje": f"Bebida {tipo} actualizada con éxito.",
