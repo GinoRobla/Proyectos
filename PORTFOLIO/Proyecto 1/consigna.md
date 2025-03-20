@@ -1,4 +1,3 @@
-# Segundo parcial - Tema 1
 
 ## API de bebidas para la Taberna de Moe
 
